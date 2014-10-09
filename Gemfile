@@ -38,3 +38,12 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'rubocop'
+
+# Use Kaminari for paging
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+
+# Use powerpack for extra goodness
+gem 'powerpack', '~> 0.0.9'
