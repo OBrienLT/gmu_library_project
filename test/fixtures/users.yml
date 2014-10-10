@@ -2,12 +2,12 @@
 
 one:
   name: MyString
-  user_id: 1
+  user_id: MyString
   password_digest: MyString
   admin: false
 
 two:
   name: MyString
-  user_id: 1
+  user_id: MyString
   password_digest: MyString
   admin: false
