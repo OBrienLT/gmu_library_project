@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GmuLibraryProject</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Library</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<% if session[:user_id] %>
+		<div class="container">
+			<%= render '/layouts/header' %>
+		</div>
+	<% end %>
+	<div class="container">
+		<div class="col-xs-9">
+			<%= render '/layouts/flashes' %>
+			<%= yield %>
+		</div>
+		<% if session[:user_id] %>
+			<div class="col-xs-3">
+				<%= render '/layouts/sidebar' %>
+			</div>
+		<% end %>
+	</div>
+	<%= render '/layouts/footer' %>
 </body>
 </html>
