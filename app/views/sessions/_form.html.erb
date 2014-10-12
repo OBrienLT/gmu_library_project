@@ -6,10 +6,13 @@
   <% end %>
 
   <%= bootstrap_form_field(f, :password) do %>
-    <%= f.text_field :password, class: "form-control" %>
+    <%= f.password_field :password, class: "form-control" %>
   <% end %>
 
   <p>
     <%= f.submit class: 'btn btn-primary', value: 'Login' %>
+  </p>
+  <p>
+    New to the Library? <%= link_to 'Sign up now', new_user_path %>
   </p>
 <% end %>

@@ -1,33 +1,15 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for(@user, html:{class: 'form-horizontal'}) do |f| %>
+  <%= render 'shared/errors', object: @user %>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= bootstrap_form_field(f, :name) do %>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :password_digest %><br>
-    <%= f.text_field :password_digest %>
-  </div>
-  <div class="field">
-    <%= f.label :admin %><br>
-    <%= f.check_box :admin %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= bootstrap_form_field(f, :password) do %>
+    <%= f.password_field :password, class: "form-control" %>
+  <% end %>
+
+  <p>
+    <%= f.submit class: 'btn btn-primary', value: 'Create my account' %> <%= link_to 'Back', sessions_new_path %>
+  </p>
 <% end %>
