@@ -6,8 +6,14 @@
   <% end %>
 
   <%= bootstrap_form_field(f, :password) do %>
-    <%= f.password_field :password, class: "form-control" %>
+    <%= f.password_field :password_digest, class: "form-control" %>
   <% end %>
+
+  <%= bootstrap_form_field(f, :password_confirmation) do %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+  <% end %>
+
+  <%= f.hidden_field :isadmin, value: "false" %>
 
   <p>
     <%= f.submit class: 'btn btn-primary', value: 'Create my account' %> <%= link_to 'Back', sessions_new_path %>

@@ -1,4 +1,12 @@
 module ApplicationHelper
+	def flash_class(type)
+    case type
+    when :notice then 'alert-info'
+    when :alert then 'alert-warning'
+    else 'alert-info'
+    end
+  end
+  
 	def bootstrap_form_field(f, field, &block)
 		div_style = ['form-group']
 		has_any_errors = f.object.errors.present?
