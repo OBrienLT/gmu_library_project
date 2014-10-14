@@ -3,11 +3,11 @@
 one:
   name: MyString
   user_id: MyString
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create('secret') %>
   admin: false
 
 two:
   name: MyString
   user_id: MyString
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create('secret') %>
   admin: false

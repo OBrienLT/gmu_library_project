@@ -18,7 +18,7 @@ module ApplicationHelper
 		content_tag(:div, class: div_style.join(' ')) do
 			inner = f.label(field, class: 'col-sm-2 control-label')
 			inner += content_tag(:div, class: 'col-sm-10') do
-			block.call if block
+				block.call if block
 			end
 			if has_any_errors
 				if has_field_errors

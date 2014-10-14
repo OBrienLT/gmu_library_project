@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  resources :books
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  get 'sessions/create'
+  get 'sessions/destroy'
+
+  resources :users
+
   get 'sessions/new'
 
   get 'sessions/create'

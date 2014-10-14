@@ -1,4 +1,4 @@
-<%= form_for(@session, html:{class: 'form-horizontal'}) do |f| %>
+<%= form_for(@session, url: {action: "create"}, html:{class: 'form-horizontal'}) do |f| %>
   <%= render 'shared/errors', object: @session %>
 
   <%= bootstrap_form_field(f, :name) do %>
@@ -13,6 +13,6 @@
     <%= f.submit class: 'btn btn-primary', value: 'Login' %>
   </p>
   <p>
-    New to the Library? <%= link_to 'Sign up now', new_user_path %>
+    New to the Library? <%= link_to 'Register for an account', new_user_path %>
   </p>
 <% end %>

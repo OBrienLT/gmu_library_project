@@ -51,4 +51,4 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'powerpack', '~> 0.0.9'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
