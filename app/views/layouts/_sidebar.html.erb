@@ -19,6 +19,18 @@
         <span class="pull-left glyphicon glyphicon-th-list"></span> My Reservations
       <% end %>
     </p>
+    <% if session[:admin] %>
+      <p>
+        <%= link_to new_book_path, class: 'btn btn-default col-md-12' do %>
+          <span class="pull-left glyphicon glyphicon-download-alt"></span> New Book
+        <% end %>
+      </p>
+      <p>
+        <%= link_to new_book_path, class: 'btn btn-default col-md-12' do %>
+          <span class="pull-left glyphicon glyphicon-download-alt"></span> Overdue Books
+        <% end %>
+      </p>
+    <% end %>
     <p>
       <%= link_to logout_url, class: 'btn btn-default col-md-12', :method => 'delete' do %>
         <span class="pull-left glyphicon glyphicon-off"></span> Logout
