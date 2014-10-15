@@ -1,49 +1,44 @@
-<p id="notice"><%= notice %></p>
+<article class="book">
+  <header>
+    <h2 class="text-primary"><%= @book.title %></h2>
+    <aside class="book-cover">
+      <div class="col-sm-4">
+      <%= image_tag(@book.image_cover_url) %>
+      </div>
+      <div class="col-sm-8"><%= @book.abstract %></div>
+    </aside>
+  </header>
+  <section>
+    <header><h4 class="text-primary">Details</h4></header>
+    <p>
+      <label>ISBN:</label>
+      <%= @book.isbn %>
+    </p>
+    <p>
+      <label>Author:</label>
+      <%= @book.author.name %>
+    </p>
+    <p>
+      <label>Genre:</label>
+      <%= @book.genre %>
+    </p>
+    <p>
+      <label>Pages:</label>
+      <%= number_with_delimiter(@book.pages) %>
+    </p>
+    <p>
+      <label>Published On:</label>
+      <%= @book.published_on %>
+    </p>
+    <p>
+      <label>Available to Reserve:</label>
+      <%= @book.total_in_library %>
+    </p>
+  </section>
 
-<p>
-  <strong>Isbn:</strong>
-  <%= @book.isbn %>
-</p>
+  <nav id="book-show-buttons">
+    <%= link_to 'Reserve', edit_book_path(@book), class: 'btn btn-default' %>
+    </span>
+  </nav>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @book.genre %>
-</p>
-
-<p>
-  <strong>Abstract:</strong>
-  <%= @book.abstract %>
-</p>
-
-<p>
-  <strong>Pages:</strong>
-  <%= @book.pages %>
-</p>
-
-<p>
-  <strong>Image cover url:</strong>
-  <%= @book.image_cover_url %>
-</p>
-
-<p>
-  <strong>Published on:</strong>
-  <%= @book.published_on %>
-</p>
-
-<p>
-  <strong>Total in library:</strong>
-  <%= @book.total_in_library %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+</article>
