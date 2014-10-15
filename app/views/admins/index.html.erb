@@ -14,15 +14,15 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= link_to user.name, admin_path(user) %></td>
         <td><%= user.user_id %></td>
         <td><%= user.admin %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_path(user), :class => 'btn btn-default btn-xs' %>
+                      edit_admin_path(user), :class => 'btn btn-default btn-xs' %>
           <% if session[:user_id] != user.id %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      user_path(user),
+                      admin_path(user),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
@@ -40,6 +40,6 @@
 
 <br>
 
-<%= link_to users_newAdmin_path, class: 'btn btn-default col-md-2' do %>
+<%= link_to new_admin_path, class: 'btn btn-default col-md-2' do %>
         <span class="pull-left glyphicon glyphicon-user"></span> New User
       <% end %>

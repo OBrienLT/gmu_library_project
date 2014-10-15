@@ -7,20 +7,27 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  get 'sessions/create'
-  get 'sessions/destroy'
-
-  resources :users
-
   get 'sessions/new'
-
   get 'sessions/create'
-
   get 'sessions/destroy'
+
+  resources :users do
+    collection do
+      get 'page/:page', :action => :index
+    end
+  end
+
+  # controller :admin do
+  #   get 'admin' => 'admin#index'
+  #   get 'admin/new'
+  #   get 'admin/edit'
+  #   get 'admin/show'
+  #   get 'admin/destroy'
+  # end
+  resources :admins
 
   root 'sessions#new'
-  resources :users
-
+  
   resources :authors
 
   # The priority is based upon order of creation: first created -> highest priority.
