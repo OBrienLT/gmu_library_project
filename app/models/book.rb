@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
 	
-	GENRES = [ "Biography", "Classic", "Crime/Detective", "Fantasy", "Historical Fiction", "Humor", "Mystery"
+	GENRES = [ "Biography", "Classic", "Crime/Detective", "Fantasy", "Historical Fiction", "Humor", "Mystery",
 				"Science Fiction", "Suspense/Thriller" ]
 
 	validates :isbn, :title, :abstract, :pages, :genre, :published_on, :total_in_library, :author, presence: true
