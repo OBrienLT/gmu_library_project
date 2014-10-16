@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :books
+  resources :admins
+  resources :authors
+  resources :reservations
 
   controller :sessions do
     get 'login' => :new
@@ -24,11 +27,8 @@ Rails.application.routes.draw do
   #   get 'admin/show'
   #   get 'admin/destroy'
   # end
-  resources :admins
 
   root 'sessions#new'
-  
-  resources :authors
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

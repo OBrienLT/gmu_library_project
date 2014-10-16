@@ -4,7 +4,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.order(:title).page(params[:page])
+    if params[:search]
+      @books = Book.search(params[:search]).order(:title).page(params[:page])
+    else
+      @books = Book.all.order(:title).page(params[:page])
+    end
   end
 
   # GET /books/1

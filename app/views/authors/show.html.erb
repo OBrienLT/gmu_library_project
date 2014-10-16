@@ -12,7 +12,7 @@
     <header><h4 class="text-primary">Details</h4></header>
     <p>
       <label>Date of Birth:</label>
-      <%= @author.dob %>
+      <%= @author.dob.strftime('%B %d, %Y') if @author.dob %>
     </p>
     <p>
       <label>Nationality:</label>
