@@ -3,7 +3,7 @@
     <h2 class="text-primary"><%= @book.title %></h2>
     <aside class="book-cover">
       <div class="col-sm-4">
-      <%= image_tag(@book.image_cover_url) %>
+      <%= image_tag @book.image_cover_url, :class => 'img-responsive' %>
       </div>
       <div class="col-sm-8"><%= @book.abstract %></div>
     </aside>
@@ -28,7 +28,7 @@
     </p>
     <p>
       <label>Published On:</label>
-      <%= @book.published_on %>
+      <%= @book.published_on.strftime('%m/%d/%Y') if f.object.birth_date) %>
     </p>
     <p>
       <label>Available to Reserve:</label>

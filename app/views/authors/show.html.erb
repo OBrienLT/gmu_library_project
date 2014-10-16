@@ -1,34 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @author.name %>
-</p>
-
-<p>
-  <strong>Dob:</strong>
-  <%= @author.dob %>
-</p>
-
-<p>
-  <strong>Nationality:</strong>
-  <%= @author.nationality %>
-</p>
-
-<p>
-  <strong>Awards:</strong>
-  <%= @author.awards %>
-</p>
-
-<p>
-  <strong>Biography:</strong>
-  <%= @author.biography %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @author.image_url %>
-</p>
-
-<%= link_to 'Edit', edit_author_path(@author) %> |
-<%= link_to 'Back', authors_path %>
+<article class="author">
+  <header class="row">
+    <h2 class="text-primary"><%= @author.name %></h2>
+    <aside class="author-cover">
+      <div class="col-sm-4">
+      <%= image_tag(@author.image_url) %>
+      </div>
+      <div class="col-sm-8"><%= @author.biography %></div>
+    </aside>
+  </header>
+  <section>
+    <header><h4 class="text-primary">Details</h4></header>
+    <p>
+      <label>Date of Birth:</label>
+      <%= @author.dob %>
+    </p>
+    <p>
+      <label>Nationality:</label>
+      <%= @author.nationality %>
+    </p>
+    <p>
+      <label>Awards:</label>
+      <%= @author.awards %>
+    </p>
+  </section>
+  <section>
+    <header><h4 class="text-primary">Publications</h4></header>
+    <div id="books">
+      <% @author.books.each do |book| %>
+        <div class="row well">
+          <div class="col-sm-3">
+            <%= link_to(book) do %>
+            <%= image_tag(book.image_cover_url) %>
+            <% end %>
+          </div>
+          <div class="col-sm-9">
+            <h3><%= link_to(book.title, book) %> <small>by <%= book.author.name %></small></h3>
+            <p>
+            </p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+  </section>
+</article>
