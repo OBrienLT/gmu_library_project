@@ -24,11 +24,12 @@
       <label>Awards:</label>
       <%= @author.awards %>
     </p>
+    <% if session[:admin] %>
   <nav id="book-show-buttons">
     <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
     </span>
   </nav>
-
+<% end %>
   </section>
   <section>
     <header><h4 class="text-primary">Publications</h4></header>
