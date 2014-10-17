@@ -14,6 +14,13 @@
         <span class="pull-left glyphicon glyphicon-user"></span> Authors
       <% end %>
     </p>
+    <% if session[:admin] %>
+    <p>
+      <%= link_to new_author_path, class: 'btn btn-default col-md-12' do %>
+        <span class="pull-left glyphicon glyphicon-user"></span> New Author
+      <% end %>
+    </p>
+    <% end %>
     <p>
       <%= link_to reservations_path, class: 'btn btn-default col-md-12' do %>
         <span class="pull-left glyphicon glyphicon-th-list"></span> My Reservations
