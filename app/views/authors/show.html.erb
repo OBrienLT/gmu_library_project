@@ -10,6 +10,8 @@
   </header>
   <section>
     <header><h4 class="text-primary">Details</h4></header>
+    
+
     <p>
       <label>Date of Birth:</label>
       <%= @author.dob %>
@@ -22,6 +24,11 @@
       <label>Awards:</label>
       <%= @author.awards %>
     </p>
+  <nav id="book-show-buttons">
+    <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
+    </span>
+  </nav>
+
   </section>
   <section>
     <header><h4 class="text-primary">Publications</h4></header>
