@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :genre %><br>
-    <%= f.text_field :genre %>
+    <%= f.select :genre, Book::GENRES, { prompt: "Choose a genre" } %>
   </div>
   <div class="field">
     <%= f.label :abstract %><br>
@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :pages %><br>
-    <%= f.number_field :pages %>
+    <%= f.number_field :pages, :min => 1 %>
   </div>
   <div class="field">
     <%= f.label :image_cover_url %><br>
@@ -45,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :total_in_library %><br>
-    <%= f.number_field :total_in_library %>
+    <%= f.number_field :total_in_library, :min => 1 %>
   </div>
   <div class="actions">
     <%= f.submit %>
