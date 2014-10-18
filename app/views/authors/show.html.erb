@@ -2,16 +2,12 @@
   <header class="row">
     <h2 class="text-primary"><%= @author.name %></h2>
     <aside class="author-cover">
-      <div class="col-sm-4">
       <%= image_tag(@author.image_url) %>
-      </div>
-      <div class="col-sm-8"><%= @author.biography %></div>
     </aside>
+    <p><%= @author.biography %></p>
   </header>
   <section>
     <header><h4 class="text-primary">Details</h4></header>
-    
-
     <p>
       <label>Date of Birth:</label>
       <%= @author.dob.strftime('%B %d, %Y') if @author.dob %>
@@ -25,11 +21,11 @@
       <%= @author.awards %>
     </p>
     <% if session[:admin] %>
-  <nav id="book-show-buttons">
-    <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
-    </span>
-  </nav>
-<% end %>
+      <nav id="author-show-buttons">
+        <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
+        </span>
+      </nav>
+    <% end %>
   </section>
   <section>
     <header><h4 class="text-primary">Publications</h4></header>

@@ -1,12 +1,10 @@
 <article class="book">
-  <header>
+  <header class="row">
     <h2 class="text-primary"><%= @book.title %></h2>
     <aside class="book-cover">
-      <div class="col-sm-4">
-      <%= image_tag @book.image_cover_url, :class => 'img-responsive' %>
-      </div>
-      <div class="col-sm-8"><%= @book.abstract %></div>
+      <%= image_tag(@book.image_cover_url) %>
     </aside>
+    <p><%= @book.abstract %></p>
   </header>
   <section>
     <header><h4 class="text-primary">Details</h4></header>
@@ -35,9 +33,14 @@
       <%= @book.total_in_library %>
     </p>
   </section>
-
-  <nav id="book-show-buttons">
-    <%= link_to 'Reserve', new_reservation_path, class: 'btn btn-default' %>
-  </nav>
+  <% if @book.reservations.any? %>
+    You already have this book checked out.
+  <% else %>
+    <%= form_tag(user_book_reservations_path(session[:user_id], @book.id), :method => "post", id: "reserve-book-form") do %>
+      <nav id="book-show-buttons">
+        <%= submit_tag "Reserve", :id => 'btn_submit', :name => nil, class: "btn btn-default" %>
+      </nav>
+    <% end %>
+  <% end %>
 
 </article>

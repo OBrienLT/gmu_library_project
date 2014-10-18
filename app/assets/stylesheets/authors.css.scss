@@ -1,0 +1,17 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+article.author {
+  header {
+    aside.author-cover {
+      float: left;
+      margin: 0 20px 20px 0;
+    }
+  }
+}
+
+nav#author-show-buttons {
+  margin-top: 2em;
+}
+

@@ -14,15 +14,8 @@
         <span class="pull-left glyphicon glyphicon-user"></span> Authors
       <% end %>
     </p>
-    <% if session[:admin] %>
     <p>
-      <%= link_to new_author_path, class: 'btn btn-default col-md-12' do %>
-        <span class="pull-left glyphicon glyphicon-user"></span> New Author
-      <% end %>
-    </p>
-    <% end %>
-    <p>
-      <%= link_to reservations_path, class: 'btn btn-default col-md-12' do %>
+      <%= link_to user_reservations_path(session[:user_id]), class: 'btn btn-default col-md-12' do %>
         <span class="pull-left glyphicon glyphicon-th-list"></span> My Reservations
       <% end %>
     </p>
@@ -39,7 +32,7 @@
       </p>
       <p>
         <%= link_to admins_path, class: 'btn btn-default col-md-12' do %>
-          <span class="pull-left glyphicon glyphicon-eye-open"></span> User Admin
+          <span class="pull-left glyphicon glyphicon-wrench"></span> User Admin
         <% end %>
       </p>
     <% end %>

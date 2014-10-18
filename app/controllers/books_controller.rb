@@ -14,6 +14,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    check_if_reserved
   end
 
   # GET /books/new
@@ -69,6 +70,10 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+    end
+
+    def check_if_reserved
+      @reservation = Reservation.where('user_id = ? AND book_id = ?', session[:user_id], @book.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

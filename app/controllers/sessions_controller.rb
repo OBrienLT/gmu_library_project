@@ -5,6 +5,10 @@ class SessionsController < ApplicationController
     @session = User.new
   end
 
+  def register
+    @session = User.new
+  end
+
   def create
     #redirect_to login_url, alert: user_params[:name]
     user = User.find_by(name: user_params[:name])

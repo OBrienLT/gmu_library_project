@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   resources :books
   resources :admins
   resources :authors
-  resources :reservations
 
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
+    get 'register' => :register
     delete 'logout' => :destroy
   end
 
@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     collection do
       get 'page/:page', :action => :index
     end
+    resources :books do
+      resources :reservations, only: [:create, :destroy]
+    end
+    resources :reservations, only: [:index, :show]
   end
 
   # controller :admin do
