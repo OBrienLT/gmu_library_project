@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
+  respond_to :html, :xml, :json
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_author, only: [:create]
-
+  
   # GET /books
   # GET /books.json
   def index
@@ -35,9 +35,10 @@ class BooksController < ApplicationController
     # @book.author = @author
 
     # respond_to do |format|
-    @book = @author.books.new(book_params)
-    respond_with @author, @book  do |format|
-      if @book.save
+    @book = Book.new(book_params)
+    @author = Author.where('id = ?', :author)
+    respond_with @author  do |format|
+      if @author.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
@@ -76,6 +77,7 @@ class BooksController < ApplicationController
     def set_book
       @book = Book.find(params[:id])
       @user = User.find(session[:user_id])
+      @reservation = Reservation.where('book_id = ? and user_id = ?', @book.id, @user.id)
     end
 
     def set_author
@@ -84,6 +86,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :genre, :abstract, :pages, :image_cover_url, :published_on, :total_in_library, :author)
+      params.require(:book).permit(:isbn, :title, :genre, :abstract, :pages, :image_cover_url, :published_on, :total_in_library)
     end
 end

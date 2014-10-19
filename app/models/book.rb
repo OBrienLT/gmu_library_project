@@ -1,7 +1,6 @@
 class Book < ActiveRecord::Base
 	
-	GENRES = [ "Biography", "Classic", "Crime/Detective", "Fantasy", "Historical Fiction", "Humor", "Mystery",
-				"Science Fiction", "Suspense/Thriller" ]
+	GENRES = %w(Sci-Fi Fiction Non-Fiction Tragedy Mystery Fantasy Mythology)
 
 	validates :isbn, :title, :abstract, :pages, :genre, :published_on, :total_in_library, :author, presence: true
 	validates :abstract, length: { minimum: 15 }
@@ -12,7 +11,7 @@ class Book < ActiveRecord::Base
 	  where("title like ? or isbn like ?", "%#{query}%", "%#{query}%") 
 	end
 	
-	belongs_to :author
+  belongs_to :author
 	has_many :reservations, dependent: :destroy
 	has_many :users, :through => :reservations
 end

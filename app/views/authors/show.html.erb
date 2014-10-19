@@ -2,7 +2,7 @@
   <header class="row">
     <h2 class="text-primary"><%= @author.name %></h2>
     <aside class="author-cover">
-      <%= image_tag(@author.image_url) %>
+      <%= image_tag(@author.image_url, size: "130x190", alt: @author.name) %>
     </aside>
     <p><%= @author.biography %></p>
   </header>
@@ -32,12 +32,12 @@
     <div id="books">
       <% @author.books.each do |book| %>
         <div class="row well">
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <%= link_to(book) do %>
-            <%= image_tag(book.image_cover_url) %>
+            <%= image_tag(book.image_cover_url, size: "90x130", alt: book.title) %>
             <% end %>
           </div>
-          <div class="col-sm-9">
+          <div class="col-sm-10">
             <h3><%= link_to(book.title, book) %> <small>by <%= book.author.name %></small></h3>
             <p>
             </p>
