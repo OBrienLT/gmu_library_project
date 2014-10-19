@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_author, only: [:create]
 
   # GET /books
   # GET /books.json
@@ -7,19 +8,20 @@ class BooksController < ApplicationController
     if params[:search]
       @books = Book.search(params[:search]).order(:title).page(params[:page])
     else
-      @books = Book.all.order(:title).page(params[:page])
+      @books = Book.joins(:author).order(:title).page(params[:page])
     end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    check_if_reserved
+    # check_if_reserved
   end
 
   # GET /books/new
   def new
     @book = Book.new
+    @author = Author.order(:name).page(params[:page])
   end
 
   # GET /books/1/edit
@@ -29,14 +31,17 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    # @book = @author.books.new(book_params)
+    # @book.author = @author
 
-    respond_to do |format|
+    # respond_to do |format|
+    @book = @author.books.new(book_params)
+    respond_with @author, @book  do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html { redirect_to new_book_path, notice: "The Book #{@book.author.name}" }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -70,14 +75,15 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      @user = User.find(session[:user_id])
     end
 
-    def check_if_reserved
-      @reservation = Reservation.where('user_id = ? AND book_id = ?', session[:user_id], @book.id)
+    def set_author
+      @author = Author.where('id = ?', :author)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :author_id, :genre, :abstract, :pages, :image_cover_url, :published_on, :total_in_library)
+      params.require(:book).permit(:isbn, :title, :genre, :abstract, :pages, :image_cover_url, :published_on, :total_in_library, :author)
     end
 end

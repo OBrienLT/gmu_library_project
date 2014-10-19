@@ -3,6 +3,8 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :book
 
+  scope :overduebooks, -> { where('due_on < ?', Time.now.to_date) }
+
   protected
 
   def set_dates

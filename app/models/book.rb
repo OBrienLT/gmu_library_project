@@ -8,11 +8,11 @@ class Book < ActiveRecord::Base
 	validates :pages, :total_in_library, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 	validates :genre, inclusion: { in: GENRES }
 
-	belongs_to :author
-
 	def self.search(query)
 	  where("title like ? or isbn like ?", "%#{query}%", "%#{query}%") 
 	end
 	
+	belongs_to :author
 	has_many :reservations, dependent: :destroy
+	has_many :users, :through => :reservations
 end

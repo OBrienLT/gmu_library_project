@@ -12,13 +12,19 @@
         <small>Reserved On: <%= reservation.reserved_on.strftime('%B %d, %Y') if reservation.reserved_on %> </small><br />
         <small>Due On: <%= reservation.due_on.strftime('%B %d, %Y') if reservation.due_on %> </small>
       </p>
-      <div class="btn-group pull-right">
-      <%= link_to t('.destroy', :default => t("Return Book")),
-                      user_book_reservation_path(session[:user_id], reservation.book.id, reservation.id),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you would like to return this book?')) },
-                      :class => 'btn btn-sm btn-danger' %>
-      </div>
+      
+      <% if reservation.due_on < Time.now.to_date && reservation.user.id != session[:user_id] %>
+        <div class="btn-group"><span class = "label label-default">Over Due!</span></div>
+      <% else %>
+        <div class="btn-group pull-right">
+        <%= link_to t('.destroy', :default => t("Return Book")),
+                        user_book_reservation_path(session[:user_id], reservation.book.id, reservation.id),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you would like to return this book?')) },
+                        :class => 'btn btn-sm btn-danger' %>
+        </div>
+      <% end %>
+      
     </div>
   </div>
 <% end %>

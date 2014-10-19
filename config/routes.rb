@@ -23,7 +23,13 @@ Rails.application.routes.draw do
     end
     resources :reservations, only: [:index, :show]
   end
-
+  resources :reservations do
+    collection do
+      get 'page/:page', :action => :index
+      get 'overdue'
+      get 'overdue/page/:page', :action => :bargains
+    end
+  end
   # controller :admin do
   #   get 'admin' => 'admin#index'
   #   get 'admin/new'

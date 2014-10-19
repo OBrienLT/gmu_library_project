@@ -33,8 +33,8 @@
       <%= @book.total_in_library %>
     </p>
   </section>
-  <% if @book.reservations.any? %>
-    You already have this book checked out.
+  <% if @user.reservations.any? %>
+    <span class = "label label-default">You already have this book checked out.</span>
   <% else %>
     <%= form_tag(user_book_reservations_path(session[:user_id], @book.id), :method => "post", id: "reserve-book-form") do %>
       <nav id="book-show-buttons">

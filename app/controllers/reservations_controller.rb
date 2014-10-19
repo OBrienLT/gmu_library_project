@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+
+  respond_to :html, :xml, :json
 	before_action :set_user_book, only: [:create]
 
 	# GET /reservations
@@ -7,6 +9,11 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.joins(:book)
     									.where('user_id = ?', params[:user_id])
     									.order(:reserved_on).page(params[:page])
+  end
+
+  def overdue
+    @reservations = list_overdue_books.overduebooks
+    respond_with @reservations
   end
 
   # POST /reservations
@@ -59,5 +66,9 @@ class ReservationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
       params.require(:reservation).permit(:user_id)
+    end
+
+    def list_overdue_books
+      Reservation.includes(:book).order(:due_on).page params[:page]
     end
 end
