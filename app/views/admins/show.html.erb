@@ -11,7 +11,7 @@
   <% end %>
 
   <%= bootstrap_form_field(f, :admin) do %>
-    <%= f.text_field :admin, :readonly => true, class: "form-control checkbox" %>
+    <%= f.check_box :admin, :readonly => true, class: "checkbox" %>
   <% end %>
 
   <p>

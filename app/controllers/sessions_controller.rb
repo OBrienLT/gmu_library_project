@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
   before_action :set_user, only: [:create]
 
   def new
+    if session[:user_id] != nil
+      session[:user_id] = nil
+    end
+
     @session = User.new
   end
 

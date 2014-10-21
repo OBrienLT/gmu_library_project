@@ -2,7 +2,7 @@ class Book < ActiveRecord::Base
 	
 	GENRES = %w(Sci-Fi Fiction Non-Fiction Tragedy Mystery Fantasy Mythology)
 
-	validates :isbn, :title, :abstract, :pages, :genre, :published_on, :total_in_library, :author, presence: true
+	validates :isbn, :title, :abstract, :pages, :genre, :published_on, :total_in_library, presence: true
 	validates :abstract, length: { minimum: 15 }
 	validates :pages, :total_in_library, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 	validates :genre, inclusion: { in: GENRES }
@@ -11,7 +11,17 @@ class Book < ActiveRecord::Base
 	  where("title like ? or isbn like ?", "%#{query}%", "%#{query}%") 
 	end
 	
-  belongs_to :author
+  belongs_to :author, foreign_key: 'author_id'
+  validates_presence_of :author
 	has_many :reservations, dependent: :destroy
 	has_many :users, :through => :reservations
+
+	before_validation :set_selected_author
+
+	private
+  def set_selected_author
+    if author_id && author_id != '0'
+      self.author = Author.find(author_id)
+    end
+  end
 end

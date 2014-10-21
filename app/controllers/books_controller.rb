@@ -21,7 +21,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
-    @author = Author.order(:name).page(params[:page])
+    @author = Author.order(:name)
   end
 
   # GET /books/1/edit
@@ -35,15 +35,15 @@ class BooksController < ApplicationController
     # @book.author = @author
 
     # respond_to do |format|
-    @book = Book.new(book_params)
-    @author = Author.where('id = ?', :author)
+    @author = Author.find(book_params[:author_id])
+    @author.books.create(book_params)
     respond_with @author  do |format|
       if @author.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
+        @book = Book.find_by(title: book_params[:title])
+        format.html { redirect_to @book, notice: "The book called #{@book.title} was successfully created." }
       else
-        format.html { redirect_to new_book_path, notice: "The Book #{@book.author.name}" }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.html { render 'new', status: :unprocessable_entity }
+        format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,6 +86,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :genre, :abstract, :pages, :image_cover_url, :published_on, :total_in_library)
+      params.require(:book).permit(:isbn, :title, :genre, :abstract, :pages, :image_cover_url, :published_on, :author_id, :total_in_library)
     end
 end
