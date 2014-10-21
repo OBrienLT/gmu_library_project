@@ -1,41 +1,33 @@
-<%= form_for(@author) do |f| %>
-  <% if @author.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+<%= form_for([ @author ], html:{class:'form-horizontal'} ) do |f| %>
+  <%= render 'shared/errors', object: @author %>
 
-      <ul>
-      <% @author.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= bootstrap_form_field(f, :name) do %>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :dob %><br>
-    <%= f.date_select :dob %>
-  </div>
-  <div class="field">
-    <%= f.label :nationality %><br>
-    <%= f.text_field :nationality %>
-  </div>
-  <div class="field">
-    <%= f.label :awards %><br>
-    <%= f.text_field :awards %>
-  </div>
-  <div class="field">
-    <%= f.label :biography %><br>
-    <%= f.text_field :biography %>
-  </div>
-  <div class="field">
-    <%= f.label :image_url %><br>
-    <%= f.text_field :image_url %>
-  </div>
+  <%= bootstrap_form_field(f, "Date of Birth") do %>
+    <%= f.date_select :dob,
+                      { start_year: 1875, end_year: Time.now.year - 15, prompt: true, order: [ :month, :day, :year ] },
+                      { class: "form-control date-select" } %>
+  <% end %>
+
+  <%= bootstrap_form_field(f, :nationality) do %>
+    <%= f.text_field :nationality, class: "form-control" %>
+  <% end %>
+
+  <%= bootstrap_form_field(f, :awards) do %>
+    <%= f.text_area :awards, rows: 3, class: "form-control" %>
+  <% end %>
+
+  <%= bootstrap_form_field(f, :biography) do %>
+    <%= f.text_area :biography, rows: 10, class: "form-control" %>
+  <% end %>
+
+  <%= bootstrap_form_field(f, :image_url) do %>
+    <%= f.text_field :image_url, class: "form-control" %>
+  <% end %>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> <%= link_to 'Cancel', @author, class: 'btn btn-link' %>
   </div>
 <% end %>

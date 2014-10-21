@@ -9,6 +9,9 @@
     <div class="col-sm-10">
       <h3><%= link_to(reservation.book.title, reservation.book) %></h3>
       <p>
+        <% if session[:admin] %>
+          <small>Reserved On: <%= reservation.user.name %> </small><br />
+        <% end %>
         <small>Reserved On: <%= reservation.reserved_on.strftime('%B %d, %Y') if reservation.reserved_on %> </small><br />
         <small>Due On: <%= reservation.due_on.strftime('%B %d, %Y') if reservation.due_on %> </small>
       </p>
@@ -16,6 +19,9 @@
       <% if reservation.due_on < Time.now.to_date && reservation.user.id != session[:user_id] %>
         <div class="btn-group"><span class = "label label-default">Over Due!</span></div>
       <% else %>
+        <% if reservation.due_on < Time.now.to_date %>
+          <div class="btn-group"><span class = "label label-default">Over Due!</span></div>
+        <% end %>
         <div class="btn-group pull-right">
         <%= link_to t('.destroy', :default => t("Return Book")),
                         user_book_reservation_path(session[:user_id], reservation.book.id, reservation.id),

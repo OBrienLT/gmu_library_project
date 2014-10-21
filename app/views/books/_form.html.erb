@@ -1,4 +1,4 @@
-<%= form_for([ @book ], remote: true, authenticity_token: true, html:{class:'form-horizontal'} ) do |f| %>
+<%= form_for([ @book ], html:{class:'form-horizontal'} ) do |f| %>
   <%= render 'shared/errors', object: @book %>
 
   <%= bootstrap_form_field(f, :title) do %>
@@ -6,7 +6,7 @@
   <% end %>
 
   <%= bootstrap_form_field(f, :author_id) do %>
-    <%= f.select :author_id, options_from_collection_for_select(@author, 'id', 'name'), { prompt: "Choose an Author" }, { class: "form-control" } %>
+    <%= f.select :author_id, options_from_collection_for_select(@author, 'id', 'name', @book.author ? @book.author.id : '' ), { prompt: "Choose an Author" }, { class: "form-control" } %>
   <% end %>
 
   <%= bootstrap_form_field(f, :isbn) do %>
@@ -40,6 +40,6 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> <%= link_to 'Cancel', @book, class: 'btn btn-link' %>
   </div>
 <% end %>

@@ -35,12 +35,28 @@
   </section>
   <% if @reservation.any? %>
     <span class = "label label-default">You already have this book checked out.</span>
-  <% else %>
-    <%= form_tag(user_book_reservations_path(session[:user_id], @book.id), :method => "post", id: "reserve-book-form") do %>
+    <% if session[:admin] %>
       <nav id="book-show-buttons">
-        <%= submit_tag "Reserve", :id => 'btn_submit', :name => nil, class: "btn btn-default" %>
+        <%= link_to 'Edit', edit_book_path, class: 'btn btn-default' %>
       </nav>
     <% end %>
+  <% else %>
+      <nav id="book-show-buttons">
+        <% if session[:admin] %>
+          <%= link_to 'Edit', edit_book_path, class: 'btn btn-default' %>
+          <% if ! @reservation.any? %>
+            <%= link_to 'Delete ' + @book.title, 
+              book_path(@book),
+              method: :delete, 
+              data: { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you want to delete the book ' + @book.title + '?')) },
+              class: 'btn btn-danger' %>
+          <% end %>
+        <% end %>
+        <%= link_to 'Reserve ', 
+          user_book_reservations_path(session[:user_id], @book.id),
+          method: :post, 
+          class: 'btn btn-default' %>
+      </nav>
   <% end %>
 
 </article>

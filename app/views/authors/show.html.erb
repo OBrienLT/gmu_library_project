@@ -23,6 +23,13 @@
     <% if session[:admin] %>
       <nav id="author-show-buttons">
         <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
+        <% if ! @author.books.any? %>
+        <%= link_to 'Delete ' + @author.name, 
+            author_path(@author),
+            method: :delete, 
+            data: { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you want to delete the author ' + @author.name + '?')) },
+            class: 'btn btn-danger' %>
+        <% end %>
         </span>
       </nav>
     <% end %>

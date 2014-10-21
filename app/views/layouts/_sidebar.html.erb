@@ -35,6 +35,11 @@
           <span class="pull-left glyphicon glyphicon-wrench"></span> User Admin
         <% end %>
       </p>
+      <p>
+        <%= link_to new_author_path, class: 'btn btn-default col-md-12' do %>
+          <span class="pull-left glyphicon glyphicon-pencil"></span> New Author
+        <% end %>
+      </p>
     <% end %>
     <p>
       <%= link_to logout_url, class: 'btn btn-default col-md-12', :method => 'delete' do %>
