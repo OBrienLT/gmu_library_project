@@ -31,7 +31,6 @@
     <p>
       <label>Available to Reserve:</label>
       <% if @book.total_in_library > 0 %>
-        <label>Available to Reserve:</label>
         <%= @book.total_in_library %>
       <% else %>
         <i>There are no copies available for reservation.</i>
