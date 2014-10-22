@@ -2,7 +2,11 @@
   <nav class="navbar" role="navigation">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="navbar-header">
-        <h3>All Books</h3>
+        <% if params[:search] %>
+          <h3>Search Results</h3>
+        <% else %>
+          <h3>All Books</h3>
+        <% end %>
     </div>
     <%= form_tag(books_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
       <div class="form-group">

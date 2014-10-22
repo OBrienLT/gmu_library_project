@@ -10,7 +10,7 @@
       <h3><%= link_to(reservation.book.title, reservation.book) %></h3>
       <p>
         <% if session[:admin] %>
-          <small>Reserved On: <%= reservation.user.name %> </small><br />
+          <small>Reserved By: <%= reservation.user.name %> </small><br />
         <% end %>
         <small>Reserved On: <%= reservation.reserved_on.strftime('%B %d, %Y') if reservation.reserved_on %> </small><br />
         <small>Due On: <%= reservation.due_on.strftime('%B %d, %Y') if reservation.due_on %> </small>
