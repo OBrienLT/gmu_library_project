@@ -16,10 +16,12 @@
       <label>Nationality:</label>
       <%= @author.nationality %>
     </p>
-    <p>
-      <label>Awards:</label>
-      <%= @author.awards %>
-    </p>
+    <% if  @author.awards != nil && @author.awards.strip != '' %>
+      <p>
+        <label>Awards:</label>
+        <%= @author.awards %>
+      </p>
+    <% end %>
     <% if session[:admin] %>
       <nav id="author-show-buttons">
         <%= link_to 'Edit', edit_author_path(@author), class: 'btn btn-default' %>
