@@ -14,7 +14,7 @@
     </p>
     <p>
       <label>Author:</label>
-      <%= @book.author.name %>
+      <%= link_to(@book.author.name, author_path(@book.author_id)) %>
     </p>
     <p>
       <label>Genre:</label>
