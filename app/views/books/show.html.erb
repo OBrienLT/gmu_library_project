@@ -29,8 +29,12 @@
       <%= @book.published_on.strftime('%B %d, %Y') if @book.published_on %>
     </p>
     <p>
-      <label>Available to Reserve:</label>
-      <%= @book.total_in_library %>
+      <% if @book.total_in_library > 0 %>
+        <label>Available to Reserve:</label>
+        <%= @book.total_in_library %>
+      <% else %>
+        <i>There are no copies available for reservation.</i>
+      <% end %>
     </p>
   </section>
   <% if @reservation.any? %>
@@ -52,10 +56,12 @@
               class: 'btn btn-danger' %>
           <% end %>
         <% end %>
-        <%= link_to 'Reserve ', 
-          user_book_reservations_path(session[:user_id], @book.id),
-          method: :post, 
-          class: 'btn btn-default' %>
+        <% if @book.total_in_library > 0 %>
+          <%= link_to 'Reserve ', 
+            user_book_reservations_path(session[:user_id], @book.id),
+            method: :post, 
+            class: 'btn btn-default' %>
+        <% end %>
       </nav>
   <% end %>
 
