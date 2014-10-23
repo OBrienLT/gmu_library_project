@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :authorize
   # GET /users
   # GET /users.json
   def index
