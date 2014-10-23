@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-
+  before_action :authorize
   respond_to :html, :xml, :json
 	before_action :set_user_book, only: [:create]
 
