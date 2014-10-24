@@ -38,16 +38,20 @@ class BooksController < ApplicationController
     # @book.author = @author
 
     # respond_to do |format|
-    @author = Author.find(book_params[:author_id])
-    @author.books.create(book_params)
-    respond_with @author  do |format|
-      if @author.save
-        @book = Book.find_by(title: book_params[:title])
-        format.html { redirect_to @book, notice: "The book called #{@book.title} was successfully created." }
-      else
-        format.html { render 'new', status: :unprocessable_entity }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
+    if book_params[:author_id] != '' && book_params[:author_id] != nil
+      @author = Author.find(book_params[:author_id])
+      @author.books.create(book_params)
+      respond_with @author  do |format|
+        if @author.save
+          @book = Book.find_by(title: book_params[:title])
+          format.html { redirect_to @book, notice: "The book called #{@book.title} was successfully created." }
+        else
+          format.html { render 'new', status: :unprocessable_entity }
+          format.json { render json: @author.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to new_book_path, notice: "The book must have a valid author."
     end
   end
 
