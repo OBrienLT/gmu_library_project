@@ -8,7 +8,8 @@ class Book < ActiveRecord::Base
 	validates :genre, inclusion: { in: GENRES }
 
 	def self.search(query)
-	  where("title like ? or isbn like ?", "%#{query}%", "%#{query}%") 
+		search_string = "%" + query + "%"
+	  where("books.title like ? OR books.isbn like ? OR authors.name like ?", search_string, search_string, search_string) 
 	end
 	
   belongs_to :author, foreign_key: 'author_id'

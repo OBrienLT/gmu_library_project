@@ -6,7 +6,7 @@
   <% end %>
 
   <%= bootstrap_form_field(f, :author_id) do %>
-    <%= f.select :author_id, options_from_collection_for_select(@author, 'id', 'name', @book.author ? @book.author.id : '' ), { prompt: "Choose an Author" }, { class: "form-control" } %>
+    <%= f.select :author_id, options_from_collection_for_select(@author, 'id', 'name', @book.author && @book.id ? @book.author.id : '' ), { prompt: "Choose an Author" }, { class: "form-control" } %>
   <% end %>
 
   <%= bootstrap_form_field(f, :isbn) do %>

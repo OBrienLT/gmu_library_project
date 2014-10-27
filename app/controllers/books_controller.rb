@@ -7,7 +7,8 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     if params[:search]
-      @books = Book.search(params[:search]).order(:title).page(params[:page])
+      # @books = Book.search(params[:search]).order(:title).page(params[:page])
+      @books = Book.joins(:author).search(params[:search]).order(:title).page(params[:page])
     else
       @books = Book.joins(:author).order(:title).page(params[:page])
     end
@@ -40,12 +41,13 @@ class BooksController < ApplicationController
     # respond_to do |format|
     if book_params[:author_id] != '' && book_params[:author_id] != nil
       @author = Author.find(book_params[:author_id])
-      @author.books.create(book_params)
+      @book = @author.books.create(book_params)
       respond_with @author  do |format|
-        if @author.save
+        if @book.save
           @book = Book.find_by(title: book_params[:title])
           format.html { redirect_to @book, notice: "The book called #{@book.title} was successfully created." }
         else
+          @author = Author.order(:name)
           format.html { render 'new', status: :unprocessable_entity }
           format.json { render json: @author.errors, status: :unprocessable_entity }
         end
